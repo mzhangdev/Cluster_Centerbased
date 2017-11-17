@@ -16,8 +16,8 @@ class Clustering:
     def do_clustering(self):
         return
 
-    def test(self, classifier, testing_data):
-        return
+    def test(self, label):
+        return 0.0
 
     def dump(self):
         return ""

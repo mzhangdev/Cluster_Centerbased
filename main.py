@@ -43,14 +43,8 @@ clustering_pkg = __import__(args.clustering_module)
 clustering_data = dataset.DataSet(args.training_file, all_attributes)
 effective_attrs = copy.copy(all_attributes)
 effective_attrs.remove(label)
-Clustering = clustering_pkg.Clustering(clustering_data, effective_attrs, label)
-print Clustering.dump()
+clustering = clustering_pkg.Clustering(clustering_data, effective_attrs, label)
+print clustering.dump()
 
-"""
-if args.testing_file:
-  testing_data = dataset.DataSet(args.testing_file, all_attributes)
-  correct_results = dtree.test(classifier, testing_data)
-  print("%d of %d (%.2f%%) of testing examples correctly identified" %
-        (correct_results, len(testing_data),
-         (float(correct_results) * 100.0)/ float(len(testing_data))))
-"""
+classified_err = clustering.test(label)
+print ("Classification Error %f" % classified_err)
