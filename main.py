@@ -12,6 +12,9 @@ parser = argparse.ArgumentParser(
 parser.add_argument('clustering_module',
                     metavar='clustering-module',
                     help='clustering module name')
+parser.add_argument('number_of_target_clusters',
+                    type=int,
+                    help='Number of target clusters')
 parser.add_argument('label',
                     help='Name of the attribute to use for verification')
 parser.add_argument('--attributes',
@@ -35,6 +38,9 @@ if args.label not in all_attributes.all_names():
                      args.classifier)
     sys.exit(1)
 label = all_attributes[args.label]
+k = args.number_of_target_clusters
+if k == 0:
+    k = len(label.values)
 
 # Import the clustering module
 clustering_pkg = __import__(args.clustering_module)
@@ -43,7 +49,7 @@ clustering_pkg = __import__(args.clustering_module)
 clustering_data = dataset.DataSet(args.training_file, all_attributes)
 effective_attrs = copy.copy(all_attributes)
 effective_attrs.remove(label)
-clustering = clustering_pkg.Clustering(clustering_data, effective_attrs, label)
+clustering = clustering_pkg.Clustering(clustering_data, effective_attrs, label, k)
 print clustering.dump()
 
 classified_err = clustering.test(label)
