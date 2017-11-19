@@ -1,24 +1,12 @@
-import attributes
+import clustering
 
 
-class Clustering:
-    # Represents a clustering algorithm
+class Clustering_imp(clustering.Clustering):
+    # k-medoids algorithm implementation
 
     def __init__(self, clustering_data, attribute_set, label, k):
-        self.clustering_data = clustering_data
-        self.attribute_set = attribute_set
-        # self.attribute_set = attributes.Attributes(False, sorted(attribute_set, key = lambda attribute: attribute.name))
-        self.label = label
-        self.k = k
-
-        self.do_clustering()
+        super().__init__(clustering_data, attribute_set, label, k)
         return
 
     def do_clustering(self):
         return
-
-    def test(self, label):
-        return 0.0
-
-    def dump(self):
-        return ""

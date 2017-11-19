@@ -1,6 +1,6 @@
-import math
 import re
 import sys
+import numpy
 
 
 class Example:
@@ -12,9 +12,9 @@ class Example:
                 "%s: %d: Incorrect number of attributes (saw %d, expected %d)\n" %
                 (filename, line_num, len(values), len(attributes)))
             sys.exit(1)
-        # Add values, Verifying that they are in the known domains for each
-        # attribute
+        # Add values, Verifying that they are in the known domains for each attribute
         self.values = {}
+        values_array = []
         for ndx in range(len(attributes)):
             attr = attributes.attributes[ndx]
             if attr.values[0] != "numeric":
@@ -26,7 +26,9 @@ class Example:
                     sys.exit(1)
             else:
                 value = float(values[ndx])
+                values_array.append(value)
             self.values[attr.name] = value
+        self.np_array = numpy.array(values_array)
 
     # Find a value for the specified attribute, which may be specified as
     # an Attribute instance, or an attribute name.
@@ -35,6 +37,9 @@ class Example:
             return self.values[attr]
         else:
             return self.values[attr.name]
+
+    def get_all_values(self):
+        return self.np_array
 
 
 class DataSet:

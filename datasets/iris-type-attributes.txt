@@ -2,4 +2,4 @@ sepal length:numeric
 sepal width:numeric
 petal length:numeric
 petal width:numeric
-type:Iris-setosa,Iris-versicolor,Iris-virginica
+class:Iris-setosa,Iris-versicolor,Iris-virginica
