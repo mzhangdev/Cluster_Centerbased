@@ -68,7 +68,7 @@ class Clustering:
                 for ind_b in all_examples_inds[j + 1:]:
                     edge_matrix_ref[ind_a][ind_b] = 1
 
-        return sum([edge_matrix_self[i][j] != edge_matrix_ref[i][j] for i in range(n) for j in range(n)]) / float(n * (n - 1) / 2)
+        return sum([edge_matrix_self[i][j] != edge_matrix_ref[i][j] for i in range(n) for j in range(i + 1, n)]) / float(n * (n - 1) / 2)
 
     def dump(self):
         return ""
