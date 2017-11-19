@@ -48,7 +48,7 @@ clustering_data = dataset.DataSet(args.training_file, all_attributes)
 effective_attrs = copy.copy(all_attributes)
 effective_attrs.remove(label)
 
-clustering = clustering_pkg.Clustering_imp(clustering_data, effective_attrs, label, k)
+clustering = clustering_pkg.ClusteringImp(clustering_data, effective_attrs, label, k)
 print(clustering.dump())
 
 classified_err = clustering.test(label)

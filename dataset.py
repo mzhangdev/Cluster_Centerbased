@@ -3,6 +3,21 @@ import sys
 import numpy
 
 
+def normalize(dataset, attributes):
+    min_array = dataset[0].get_all_values()
+    max_array = dataset[0].get_all_values()
+    for example in dataset:
+        min_array = numpy.minimum(min_array, example.get_all_values())
+        max_array = numpy.maximum(max_array, example.get_all_values())
+
+    dif_array = max_array - min_array
+    for example in dataset:
+        original_array = example.get_all_values()
+        normalize_data = (original_array - min_array) / dif_array
+        example.set_all_values(normalize_data, attributes)
+    return
+
+
 class Example:
     # An individual example with values for each attribute
 
@@ -41,6 +56,16 @@ class Example:
     def get_all_values(self):
         return self.np_array
 
+    def set_all_values(self, values, attributes):
+        assert len(values) == len(attributes), "Arguments' length are not equal."
+        assert isinstance(values, list) or isinstance(values, numpy.ndarray), "Invalid argument"
+        if isinstance(values, list):
+            values = numpy.array(values)
+        for ndx in range(len(values)):
+            attr = attributes.attributes[ndx]
+            self.values[attr.name] = values[ndx]
+        self.np_array = values
+
 
 class DataSet:
     # A collection of instances, each representing data and values
@@ -69,6 +94,7 @@ class DataSet:
 
     def append(self, example):
         self.all_examples.append(example)
+
 
 
 """

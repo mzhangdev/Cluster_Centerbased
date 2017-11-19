@@ -10,8 +10,11 @@ class Cluster:
         self.center = clustering_data[0]
         return
 
-    def set_center(self, example):
-        self.center = example
+    def set_center(self, center):
+        self.center = center
+
+    def get_center(self):
+        return self.center
 
     def append(self, index):
         assert isinstance(index, int), "Not an index"
@@ -19,6 +22,12 @@ class Cluster:
 
     def get_examples_index(self):
         return self.examples_index
+
+    def get_examples(self):
+        examples = []
+        for index in self.examples_index:
+            examples.append(self.clustering_data[index])
+        return examples
 
     def clean_up(self):
         self.examples_index = []
@@ -33,7 +42,7 @@ class Clustering:
         self.attribute_set = attribute_set
         self.label = label
         self.k = k
-        self.clusters = [clustering.Cluster(clustering_data)] * k
+        self.clusters = [Cluster(clustering_data)] * k
 
         self.do_clustering()
         return

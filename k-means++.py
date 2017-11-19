@@ -7,7 +7,8 @@ import clustering
 import numpy
 import random
 
-class Clustering_imp(clustering.Clustering):
+
+class ClusteringImp(clustering.Clustering):
     #  k-means++ algorithm implementation
 
     def __init__(self, clustering_data, attribute_set, label, k):

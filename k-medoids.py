@@ -1,10 +1,13 @@
 import clustering
 
+from dataset import normalize
 
-class Clustering_imp(clustering.Clustering):
+
+class ClusteringImp(clustering.Clustering):
     # k-medoids algorithm implementation
 
     def __init__(self, clustering_data, attribute_set, label, k):
+        normalize(clustering_data, attribute_set)
         super().__init__(clustering_data, attribute_set, label, k)
         return
 
