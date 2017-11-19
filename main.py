@@ -33,7 +33,7 @@ args = parser.parse_args()
 all_attributes = attributes.Attributes(args.attributes_file)
 if args.label not in all_attributes.all_names():
     sys.stderr.write("label '%s' not a recognized attribute name\n" %
-                     args.classifier)
+                     args.label)
     sys.exit(1)
 label = all_attributes[args.label]
 k = args.number_of_target_clusters
