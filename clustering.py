@@ -17,6 +17,9 @@ class Cluster:
         assert isinstance(index, int), "Not an index"
         self.examples_index.append(index)
 
+    def get_examples_index(self):
+        return self.examples_index
+
     def clean_up(self):
         self.examples_index = []
         self.center = None
@@ -30,7 +33,8 @@ class Clustering:
         self.attribute_set = attribute_set
         self.label = label
         self.k = k
-
+        self.clusters = [clustering.Cluster(clustering_data)] * k
+        
         self.do_clustering()
         return
 
