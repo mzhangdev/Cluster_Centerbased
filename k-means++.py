@@ -23,10 +23,10 @@ class Clustering_imp(clustering.Clustering):
             self.clusters[0].center = self.clustering_data[random.randint(0, self.n - 1)].get_all_values()
 
         # Take c2 .. ck, from dataSet with probability
-        for i in (1, k):
+        for i in (1, self.k):
             # min_dists is the distance of each example (or record) to the nearest taken center
             min_dists = [0] * self.n
-            for j, example in enumerate(self.clusterng_data):
+            for j, example in enumerate(self.clustering_data):
                 min_dist = min([numpy.linalg.norm(self.clusters[j].center - example) for j in range(i)])
                 min_dists[j] = min_dist
             # gen a random number: rand_num, then select a new center with probability
@@ -36,7 +36,7 @@ class Clustering_imp(clustering.Clustering):
             for j in range(self.n):
                 pro = min_dists[j] / sum_dists
                 if accum_pro <= rand_num and accum_pro + pro > rand_num:
-                    self.cluster[i].center = self.clustering_data[j].get_all_values()
+                    self.clusters[i].center = self.clustering_data[j].get_all_values()
                     break
                 else:
                     accum_pro += pro
