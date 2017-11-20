@@ -1,7 +1,7 @@
 import attributes
 
 
-class Cluster:
+class Cluster(object):
     # Represents a cluster
 
     def __init__(self, clustering_data):
@@ -34,7 +34,7 @@ class Cluster:
         self.center = None
 
 
-class Clustering:
+class Clustering(object):
     # Represents a clustering algorithm
 
     def __init__(self, clustering_data, attribute_set, label, k):
@@ -42,9 +42,9 @@ class Clustering:
         self.attribute_set = attribute_set
         self.label = label
         self.k = k
-        self.clusters = [Cluster(clustering_data)] * k
+        self.clusters = [Cluster(clustering_data) for _ in range(k)]
 
-        self.do_clustering()
+        #self.do_clustering()
         return
 
     def do_clustering(self):
@@ -80,4 +80,9 @@ class Clustering:
         return sum([edge_matrix_self[i][j] != edge_matrix_ref[i][j] for i in range(n) for j in range(i + 1, n)]) / float(n * (n - 1) / 2)
 
     def dump(self):
+        print("Clustering result: ")
+        for i, cluster in enumerate(self.clusters):
+            print(cluster.get_examples_index())
+        print("Hamming distance to ref: ")
+        print(self.get_hamming_distance())
         return ""

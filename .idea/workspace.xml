@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24c58284-237a-46b3-ac7d-9b21ce80066a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clustering.py" afterPath="$PROJECT_DIR$/clustering.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-means++.py" afterPath="$PROJECT_DIR$/k-means++.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
