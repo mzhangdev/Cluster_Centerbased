@@ -4,17 +4,17 @@ import numpy
 
 
 def normalize(dataset, attributes):
-    min_array = dataset[0].get_all_values()
-    max_array = dataset[0].get_all_values()
+    min_values = dataset[0].get_all_values()
+    max_values = dataset[0].get_all_values()
     for example in dataset:
-        min_array = numpy.minimum(min_array, example.get_all_values())
-        max_array = numpy.maximum(max_array, example.get_all_values())
+        min_values = numpy.minimum(min_values, example.get_all_values())
+        max_values = numpy.maximum(max_values, example.get_all_values())
 
-    dif_array = max_array - min_array
+    range_array = max_values - min_values
     for example in dataset:
-        original_array = example.get_all_values()
-        normalize_data = (original_array - min_array) / dif_array
-        example.set_all_values(normalize_data, attributes)
+        original_values = example.get_all_values()
+        normalized_values = (original_values - min_values) / range_array
+        example.set_all_values(normalized_values, attributes)
     return
 
 
