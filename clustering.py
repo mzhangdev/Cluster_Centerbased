@@ -66,11 +66,12 @@ class Clustering(object):
                     edge_matrix_self[ind_a][ind_b] = 1
         # get the edge matrix of the clustering of classified label
         table = {}
-        for i in range(n):
-            if self.label[i] in table:
-                table[self.label[i]] += [i]
+        for i, example in enumerate(self.clustering_data):
+            cluster_id = example.get_value(self.label)
+            if cluster_id in table:
+                table[cluster_id] += [i]
             else:
-                table[self.label[i]] = [i]
+                table[cluster_id] = [i]
         for key in table:
             all_examples_inds = table[key]
             for j, ind_a in enumerate(all_examples_inds):
