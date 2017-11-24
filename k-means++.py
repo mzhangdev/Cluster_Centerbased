@@ -6,7 +6,7 @@
 import clustering
 import numpy
 import random
-from dataset import normalize
+from util import normalize
 
 
 class ClusteringImp(clustering.Clustering):

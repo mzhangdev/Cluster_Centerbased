@@ -1,4 +1,6 @@
 import attributes
+from evaluation import hamming_distance
+from evaluation import classification_error_distance
 
 
 class Cluster(object):
@@ -33,6 +35,14 @@ class Cluster(object):
         self.examples_index = []
         self.center = None
 
+    def get_stat(self, label):
+        stat = {name: 0 for name in label.values}
+        for index in self.examples_index:
+            example = self.clustering_data[index]
+            name = example.get_value(label)
+            stat[name] = stat[name] + 1
+        return stat
+
 
 class Clustering(object):
     # Represents a clustering algorithm
@@ -50,40 +60,19 @@ class Clustering(object):
     def do_clustering(self):
         return
 
+    def get_clusters_stat(self):
+        return [cluster.get_stat(self.label) for cluster in self.clusters]
+
     def test(self, label):
         return 0.0
-
-    def get_hamming_distance(self):
-        n = len(self.clustering_data)
-        # edge matrix: 1 - in-cluster edge, 0 - between-cluster edge, only use the upper triangle
-        edge_matrix_self = [[0] * n for i in range(n)]
-        edge_matrix_ref = [[0] * n for i in range(n)]
-        # get the edge matrix of the clustering generated
-        for i in range(self.k):
-            all_examples_inds = self.clusters[i].get_examples_index()
-            for j, ind_a in enumerate(all_examples_inds):
-                for ind_b in all_examples_inds[j + 1:]:
-                    edge_matrix_self[ind_a][ind_b] = 1
-        # get the edge matrix of the clustering of classified label
-        table = {}
-        for i, example in enumerate(self.clustering_data):
-            cluster_id = example.get_value(self.label)
-            if cluster_id in table:
-                table[cluster_id] += [i]
-            else:
-                table[cluster_id] = [i]
-        for key in table:
-            all_examples_inds = table[key]
-            for j, ind_a in enumerate(all_examples_inds):
-                for ind_b in all_examples_inds[j + 1:]:
-                    edge_matrix_ref[ind_a][ind_b] = 1
-
-        return sum([edge_matrix_self[i][j] != edge_matrix_ref[i][j] for i in range(n) for j in range(i + 1, n)]) / float(n * (n - 1) / 2)
 
     def dump(self):
         print("Clustering result: ")
         for i, cluster in enumerate(self.clusters):
             print(cluster.get_examples_index())
         print("Hamming distance to ref: ")
-        print(self.get_hamming_distance())
+        print(hamming_distance(self.clustering_data, self.clusters, self.label, self.k))
+
+        print("Miss classification error: ")
+        print(classification_error_distance(self.get_clusters_stat(), self.label.values))
         return ""

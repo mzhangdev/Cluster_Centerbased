@@ -1,6 +1,6 @@
 import clustering
 
-from dataset import normalize
+from util import normalize
 
 
 class ClusteringImp(clustering.Clustering):
