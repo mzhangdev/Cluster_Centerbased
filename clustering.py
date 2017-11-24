@@ -74,5 +74,5 @@ class Clustering(object):
         print(hamming_distance(self.clustering_data, self.clusters, self.label, self.k))
 
         print("Miss classification error: ")
-        print(classification_error_distance(self.get_clusters_stat(), self.label.values))
+        print(classification_error_distance(self.get_clusters_stat(), self.label, len(self.clustering_data)))
         return ""
