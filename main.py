@@ -52,4 +52,4 @@ clustering = clustering_pkg.ClusteringImp(clustering_data, effective_attrs, labe
 print(clustering.dump())
 
 classified_err = clustering.test(label)
-print("Classification Error %f" % classified_err)
+#print("Classification Error %f" % classified_err)

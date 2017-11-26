@@ -68,6 +68,8 @@ class Clustering(object):
 
     def dump(self):
         print("Clustering result: ")
+        for cluster in self.clusters:
+            print(cluster.get_stat(self.label))
         for i, cluster in enumerate(self.clusters):
             print(cluster.get_examples_index())
         print("Hamming distance to ref: ")
