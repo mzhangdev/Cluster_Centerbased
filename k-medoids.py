@@ -81,8 +81,8 @@ class ClusteringImp(clustering.Clustering):
                 cluster.set_center(center)
             self.group_by_centers()
             new_all_centers = [cluster.get_center() for cluster in self.clusters]
-            self.iteration = self.iteration + 1
-            if (all_centers != new_all_centers) and (max_iter != self.iteration):
+            self.iterations = self.iterations + 1
+            if (all_centers != new_all_centers) and (max_iter != self.iterations):
                 all_centers = new_all_centers
             else:
                 #print("k-medoids done in iter %d" % self.iterations)
