@@ -12,11 +12,11 @@ from util import normalize
 class ClusteringImp(clustering.Clustering):
     #  k-means++ algorithm implementation
 
-    def __init__(self, clustering_data, attribute_set, label, k):
-        normalize(clustering_data, attribute_set)
+    def __init__(self, clustering_data, attribute_set, label, k, to_normalize):
+        if to_normalize:
+            normalize(clustering_data, attribute_set)
         super(ClusteringImp, self).__init__(clustering_data, attribute_set, label, k)
         self.init_centers()
-        self.iterations = 0
         self.do_clustering()
         return
 

@@ -53,6 +53,7 @@ class Clustering(object):
         self.label = label
         self.k = k
         self.clusters = [Cluster(clustering_data) for _ in range(k)]
+        self.iterations = 0
 
         #self.do_clustering()
         return
@@ -77,4 +78,6 @@ class Clustering(object):
 
         print("Miss classification error: ")
         print(classification_error_distance(self.get_clusters_stat(), self.label, len(self.clustering_data)))
+
+        print("Converge after num of iterations: {}".format(self.iterations))
         return ""

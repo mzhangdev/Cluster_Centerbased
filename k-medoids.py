@@ -8,9 +8,10 @@ from util import normalize
 class ClusteringImp(clustering.Clustering):
     # k-medoids algorithm implementation
 
-    def __init__(self, clustering_data, attribute_set, label, k):
+    def __init__(self, clustering_data, attribute_set, label, k, to_normalize):
         super().__init__(clustering_data, attribute_set, label, k)
-        normalize(self.clustering_data, self.attribute_set)
+        if to_normalize:
+            normalize(self.clustering_data, self.attribute_set)
         self.dist_matrix = numpy.zeros(shape=(len(self.clustering_data), len(self.clustering_data)))
         self.dist_between_examples()
 
@@ -65,7 +66,7 @@ class ClusteringImp(clustering.Clustering):
         self.init_centers()
         self.group_by_center()
         all_centers = [cluster.get_center() for cluster in self.clusters]
-        iteration = 0
+        self.iterations = 0
         while True:
             for cluster in self.clusters:
                 center = self.pick_new_center(cluster)
@@ -76,10 +77,10 @@ class ClusteringImp(clustering.Clustering):
             if all_centers != new_all_centers:
                 all_centers = new_all_centers
             else:
-                print("k-medoids done in iter %d" % iteration)
+                print("k-medoids done in iter %d" % self.iterations)
                 break
-            iteration = iteration + 1
-            if max_iter == iteration:
+            self.iterations = self.iterations + 1
+            if max_iter == self.iterations:
                 break
         return
 

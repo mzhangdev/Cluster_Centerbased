@@ -25,6 +25,10 @@ parser.add_argument('--train',
                     help='Name of the file to use for clustering',
                     dest='training_file',
                     required=True)
+parser.add_argument('--normalize',
+                    help='Normalize the input data? y - yes, n - no',
+                    required=True)
+
 
 args = parser.parse_args()
 
@@ -47,8 +51,10 @@ clustering_pkg = __import__(args.clustering_module)
 clustering_data = dataset.DataSet(args.training_file, all_attributes)
 effective_attrs = copy.copy(all_attributes)
 effective_attrs.remove(label)
+print("args.normalize: {}".format(args.normalize))
+to_normalize = True if args.normalize == 'y' else False
 
-clustering = clustering_pkg.ClusteringImp(clustering_data, effective_attrs, label, k)
+clustering = clustering_pkg.ClusteringImp(clustering_data, effective_attrs, label, k, to_normalize)
 print(clustering.dump())
 
 classified_err = clustering.test(label)
