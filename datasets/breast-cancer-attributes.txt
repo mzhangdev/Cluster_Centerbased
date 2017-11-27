@@ -8,4 +8,4 @@ Bare Nuclei:numeric
 Bland Chromatin:numeric         
 Normal Nucleoli:numeric      
 Mitoses:numeric     
-Class:2,4
+class:2,4
