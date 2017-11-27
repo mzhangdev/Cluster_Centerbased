@@ -37,18 +37,21 @@ def run(cmd, f):
     print("avg iterations: {}".format(sum(iterations) / float(l)))
     f.close()
 
-f = open('./output/k-means++-iris-unnomalized.csv', 'w+')
-cmd = 'python3 ./main.py k-means++ 0 class --attributes datasets/iris-type-attributes.txt --train datasets/iris-type-data.csv --normalize n'
-run(cmd, f)
+# iris dataset
+datasets_name = ['bank-note', 'breast-cancer', 'iris-type']
+for name in datasets_name:
+    f = open('./output/k-means++-{}-unnomalized.csv'.format(name), 'w+')
+    cmd = 'python3 ./main.py k-means++ 0 class --attributes datasets/{}-attributes.txt --train datasets/{}-data.csv --normalize n'.format(name, name)
+    run(cmd, f)
 
-f = open('./output/k-means++-iris-nomalized.csv', 'w+')
-cmd = 'python3 ./main.py k-means++ 0 class --attributes datasets/iris-type-attributes.txt --train datasets/iris-type-data.csv --normalize y'
-run(cmd, f)
+    f = open('./output/k-means++-{}-nomalized.csv'.format(name), 'w+')
+    cmd = 'python3 ./main.py k-means++ 0 class --attributes datasets/{}-attributes.txt --train datasets/{}-data.csv --normalize y'.format(name, name)
+    run(cmd, f)
 
-f = open('./output/k-medoids-iris-unnomalized.csv', 'w+')
-cmd = 'python3 ./main.py k-medoids 0 class --attributes datasets/iris-type-attributes.txt --train datasets/iris-type-data.csv --normalize n'
-run(cmd, f)
+    f = open('./output/k-medoids-{}-unnomalized.csv'.format(name), 'w+')
+    cmd = 'python3 ./main.py k-medoids 0 class --attributes datasets/{}-attributes.txt --train datasets/{}-data.csv --normalize n'.format(name, name)
+    run(cmd, f)
 
-f = open('./output/k-medoids-iris-nomalized.csv', 'w+')
-cmd = 'python3 ./main.py k-medoids 0 class --attributes datasets/iris-type-attributes.txt --train datasets/iris-type-data.csv --normalize y'
-run(cmd, f)
+    f = open('./output/k-medoids-{}-nomalized.csv'.format(name), 'w+')
+    cmd = 'python3 ./main.py k-medoids 0 class --attributes datasets/{}-attributes.txt --train datasets/{}-data.csv --normalize y'.format(name, name)
+    run(cmd, f)
