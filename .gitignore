@@ -1,4 +1,4 @@
-
+.DS_Store
 *.pyc
 .idea/misc.xml
 .idea/project.iml
