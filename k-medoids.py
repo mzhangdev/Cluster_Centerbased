@@ -77,7 +77,7 @@ class ClusteringImp(clustering.Clustering):
             if all_centers != new_all_centers:
                 all_centers = new_all_centers
             else:
-                print("k-medoids done in iter %d" % self.iterations)
+                #print("k-medoids done in iter %d" % self.iterations)
                 break
             self.iterations = self.iterations + 1
             if max_iter == self.iterations:

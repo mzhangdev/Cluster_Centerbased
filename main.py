@@ -51,7 +51,6 @@ clustering_pkg = __import__(args.clustering_module)
 clustering_data = dataset.DataSet(args.training_file, all_attributes)
 effective_attrs = copy.copy(all_attributes)
 effective_attrs.remove(label)
-print("args.normalize: {}".format(args.normalize))
 to_normalize = True if args.normalize == 'y' else False
 
 clustering = clustering_pkg.ClusteringImp(clustering_data, effective_attrs, label, k, to_normalize)

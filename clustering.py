@@ -1,7 +1,7 @@
 import attributes
 from evaluation import hamming_distance
 from evaluation import classification_error_distance
-
+import json
 
 class Cluster(object):
     # Represents a cluster
@@ -68,6 +68,32 @@ class Clustering(object):
         return 0.0
 
     def dump(self):
+        '''
+        res[0] -> Hamming distance
+        res[1] -> Miss classification error
+        res[2] -> iterations
+        res[3] -> Clustering result - 1
+        res[4] -> Clustering result - 2
+        '''
+        res = []
+
+        res.append(hamming_distance(self.clustering_data, self.clusters, self.label, self.k))
+        res.append(classification_error_distance(self.get_clusters_stat(), self.label, len(self.clustering_data)))
+        res.append(self.iterations)
+
+        tmp = []
+        for cluster in self.clusters:
+            tmp.append(cluster.get_stat(self.label))
+        res.append(tmp)
+
+        tmp = []
+        for i, cluster in enumerate(self.clusters):
+            tmp.append((cluster.get_examples_index()))
+        res.append(tmp)
+
+        return json.dumps(res)
+
+        '''
         print("Clustering result: ")
         for cluster in self.clusters:
             print(cluster.get_stat(self.label))
@@ -80,4 +106,5 @@ class Clustering(object):
         print(classification_error_distance(self.get_clusters_stat(), self.label, len(self.clustering_data)))
 
         print("Converge after num of iterations: {}".format(self.iterations))
-        return ""
+        '''
+        #return ""
