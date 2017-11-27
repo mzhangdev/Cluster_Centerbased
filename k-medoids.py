@@ -87,4 +87,3 @@ class ClusteringImp(clustering.Clustering):
             else:
                 #print("k-medoids done in iter %d" % self.iterations)
                 break
-        return

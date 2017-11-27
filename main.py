@@ -57,5 +57,5 @@ to_normalize = True if args.normalize == 'y' else False
 clustering = clustering_pkg.ClusteringImp(clustering_data, effective_attrs, label, k, to_normalize)
 print(clustering.dump())
 
-classified_err = clustering.test(label)
-#print("Classification Error %f" % classified_err)
+clustering.test(label)
+

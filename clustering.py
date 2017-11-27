@@ -3,6 +3,7 @@ from evaluation import hamming_distance
 from evaluation import classification_error_distance
 import json
 
+
 class Cluster(object):
     # Represents a cluster
 
@@ -55,7 +56,6 @@ class Clustering(object):
         self.clusters = [Cluster(clustering_data) for _ in range(k)]
         self.iterations = 0
 
-        #self.do_clustering()
         return
 
     def do_clustering(self):

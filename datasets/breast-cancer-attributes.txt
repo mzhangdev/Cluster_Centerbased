@@ -1,4 +1,4 @@
-Sample code number:skip     
+Sample code number:unused   
 Clump Thickness:numeric
 Uniformity of Cell Size:numeric
 Uniformity of Cell Shape:numeric

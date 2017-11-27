@@ -85,5 +85,5 @@ class Attributes:
 
     def remove_unused(self):
         for attr in self.attributes:
-            if attr.values[0] == "skip":
+            if attr.values[0] == "unused":
                 self.attributes.remove(attr)
