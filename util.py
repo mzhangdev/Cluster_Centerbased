@@ -13,4 +13,4 @@ def normalize(dataset, attributes):
         original_values = example.get_all_values()
         normalized_values = (original_values - min_values) / range_array
         example.set_all_values(normalized_values, attributes)
-    return
+

@@ -18,6 +18,8 @@ class Example:
         values_array = []
         for ndx in range(len(attributes)):
             attr = attributes.attributes[ndx]
+            if attr.values[0] == "skip":
+                continue
             if attr.values[0] != "numeric":
                 value = values[ndx]
                 if value not in attr.values:

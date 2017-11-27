@@ -1,5 +1,7 @@
 import copy
+import queue
 import attributes
+
 
 def hamming_distance(clustering_data, clusters, label, k):
     n = len(clustering_data)
@@ -42,6 +44,33 @@ def classification_error_distance(clusters_stat, label, total=None):
 
     best_match = 0
 
+    # BFS version
+    class Node:
+        def __init__(self, _clusters_stat, _label, match):
+            self.clusters_stat = _clusters_stat
+            self.label = _label
+            self.match = match
+
+    q = queue.Queue()
+    q.put(Node(clusters_stat, label, 0))
+
+    while not q.empty():
+        node = q.get()
+        c_stat = node.clusters_stat[0]
+        if len(node.label) == 1:
+            value = node.label[0]
+            best_match = max(best_match, node.match + c_stat[value])
+        else:
+            for l_idx, value in enumerate(node.label):
+                next_clusters_stat = copy.copy(node.clusters_stat)
+                next_clusters_stat.pop(0)
+                next_label_stat = copy.copy(node.label)
+                next_label_stat.pop(l_idx)
+                q.put(Node(next_clusters_stat, next_label_stat, node.match + c_stat[value]))
+
+
+    # recursion version
+    """
     def search_best_mapping(_clusters_stat, _label, match=0):
         for c_idx, c_stat in enumerate(_clusters_stat):
             for l_idx, value in enumerate(_label):
@@ -56,5 +85,7 @@ def classification_error_distance(clusters_stat, label, total=None):
                     search_best_mapping(next_clusters_stat, next_label_stat, match + c_stat[value])
 
     search_best_mapping(clusters_stat, label)
+    """
+
     d_ce = (total - best_match) / total
     return d_ce

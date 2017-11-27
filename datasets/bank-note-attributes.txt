@@ -1,0 +1,5 @@
+variance:numeric
+skewness:numeric
+curtosis:numeric
+entropy:numeric
+class:0,1

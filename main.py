@@ -45,6 +45,7 @@ clustering_pkg = __import__(args.clustering_module)
 
 # Clustering
 clustering_data = dataset.DataSet(args.training_file, all_attributes)
+all_attributes.remove_unused()
 effective_attrs = copy.copy(all_attributes)
 effective_attrs.remove(label)
 

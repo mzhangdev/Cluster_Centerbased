@@ -82,3 +82,8 @@ class Attributes:
                     self.attributes.remove(attr)
         else:
             self.attributes.remove(key)
+
+    def remove_unused(self):
+        for attr in self.attributes:
+            if attr.values[0] == "skip":
+                self.attributes.remove(attr)

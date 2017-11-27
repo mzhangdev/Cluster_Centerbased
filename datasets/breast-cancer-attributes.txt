@@ -1,0 +1,11 @@
+Sample code number:skip     
+Clump Thickness:numeric
+Uniformity of Cell Size:numeric
+Uniformity of Cell Shape:numeric
+Marginal Adhesion:numeric
+Single Epithelial Cell Size:numeric
+Bare Nuclei:numeric
+Bland Chromatin:numeric         
+Normal Nucleoli:numeric      
+Mitoses:numeric     
+Class:2,4

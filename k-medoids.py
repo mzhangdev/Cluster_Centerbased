@@ -17,6 +17,13 @@ class ClusteringImp(clustering.Clustering):
         self.do_clustering()
         return
 
+    def dist_between_examples(self):
+        for i in range(0, len(self.clustering_data)):
+            for j in range(i + 1, len(self.clustering_data)):
+                self.dist_matrix[i][j] = numpy.linalg.norm(self.clustering_data[i].get_all_values() -
+                                                           self.clustering_data[j].get_all_values())
+                self.dist_matrix[j][i] = self.dist_matrix[i][j]
+
     def init_centers(self):
         #for idx, cluster in enumerate(self.clusters):
             #cluster.center = int(len(self.clustering_data) / len(self.clusters) * (idx + 1) - 1)
@@ -30,9 +37,9 @@ class ClusteringImp(clustering.Clustering):
                     all_centers[center] = False
                     break
 
-    def group_by_center(self):
+    def group_by_centers(self):
         for idx in range(0, len(self.clustering_data)):
-            min_dist = self.dist_matrix.max()
+            min_dist = self.dist_matrix.max() + 1
             group = None
             dist_array = self.dist_matrix[idx]
             for cluster in self.clusters:
@@ -63,7 +70,7 @@ class ClusteringImp(clustering.Clustering):
 
     def do_clustering(self, max_iter=150):
         self.init_centers()
-        self.group_by_center()
+        self.group_by_centers()
         all_centers = [cluster.get_center() for cluster in self.clusters]
         iteration = 0
         while True:
@@ -71,21 +78,12 @@ class ClusteringImp(clustering.Clustering):
                 center = self.pick_new_center(cluster)
                 cluster.clean_up()
                 cluster.set_center(center)
-            self.group_by_center()
+            self.group_by_centers()
             new_all_centers = [cluster.get_center() for cluster in self.clusters]
-            if all_centers != new_all_centers:
+            iteration = iteration + 1
+            if (all_centers != new_all_centers) and (max_iter != iteration):
                 all_centers = new_all_centers
             else:
                 print("k-medoids done in iter %d" % iteration)
                 break
-            iteration = iteration + 1
-            if max_iter == iteration:
-                break
         return
-
-    def dist_between_examples(self):
-        for i in range(0, len(self.clustering_data)):
-            for j in range(i + 1, len(self.clustering_data)):
-                self.dist_matrix[i][j] = numpy.linalg.norm(self.clustering_data[i].get_all_values() -
-                                                           self.clustering_data[j].get_all_values())
-                self.dist_matrix[j][i] = self.dist_matrix[i][j]
