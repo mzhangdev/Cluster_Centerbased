@@ -1,0 +1,8 @@
+area:numeric
+perimeter:numeric
+compactness:numeric
+length of kernel:numeric
+width of kernel:numeric
+asymmetry coefficient:numeric
+length of kernel groove:numeric
+class:1,2,3

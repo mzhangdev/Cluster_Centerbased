@@ -45,7 +45,7 @@ class ClusteringImp(clustering.Clustering):
             dist_array = self.dist_matrix[idx]
             for cluster in self.clusters:
                 dist = dist_array[cluster.get_center()]
-                if min_dist > dist:
+                if min_dist >= dist:
                     min_dist = dist
                     group = cluster
             assert group is not None, "group cannot be None"
@@ -87,3 +87,4 @@ class ClusteringImp(clustering.Clustering):
             else:
                 #print("k-medoids done in iter %d" % self.iterations)
                 break
+

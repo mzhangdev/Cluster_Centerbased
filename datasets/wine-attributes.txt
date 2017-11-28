@@ -1,0 +1,14 @@
+class:1,2,3
+Alcohol:numeric
+Malic acid:numeric
+Ash:numeric
+Alcalinity of ash:numeric
+Magnesium:numeric
+Total phenols:numeric
+Flavanoids:numeric
+Nonflavanoid phenols:numeric
+Proanthocyanins:numeric
+Color intensity:numeric
+Hue:numeric
+OD280/OD315 of diluted wines:numeric
+Proline:numeric
