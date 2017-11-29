@@ -28,11 +28,11 @@ class ClusteringImp(clustering.Clustering):
 
         # Take c2 .. ck, from dataSet with probability
         for i in range(1, self.k):
-            # min_dists is the distance of each example (or record) to the nearest taken center
+            # min_dists is the distance^2 of each example (or record) to the nearest taken center
             min_dists = [0] * n
             for j, example in enumerate(self.clustering_data):
                 min_dist = min([numpy.linalg.norm(self.clusters[l].center - example.get_all_values()) for l in range(i)])
-                min_dists[j] = min_dist
+                min_dists[j] = min_dist ** 2
             # gen a random number: rand_num, then select a new center with probability
             rand_num = random.random()
             sum_dists = sum(min_dists)
@@ -47,13 +47,6 @@ class ClusteringImp(clustering.Clustering):
 
     def do_clustering(self):
         while True:
-            # debug
-            '''
-            print("Centers: ")
-            for i in range(self.k):
-                print(self.clusters[i].center)
-            '''
-
             # iterate through all the example (or record) in the dataset and append the example index to the nearest cluster
             for i, example in enumerate(self.clustering_data):
                 cand_ind, cand_dist = 0, numpy.linalg.norm(self.clusters[0].center - example.get_all_values())
@@ -67,13 +60,6 @@ class ClusteringImp(clustering.Clustering):
             for i, cluster in enumerate(self.clusters):
                 tmp_clusters[i].center = numpy.mean([self.clustering_data[e].get_all_values() for e in cluster.get_examples_index()], axis=0)
             # loop until no longer changes
-            # debug
-            '''
-            print("Clustering result in k-means: ")
-            for i, cluster in enumerate(self.clusters):
-                print(cluster.get_examples_index())
-            print([(a.center == b.center).all() for a, b in zip(self.clusters, tmp_clusters)])
-            '''
             if all([(a.center == b.center).all() for a, b in zip(self.clusters, tmp_clusters)]):
                 break
             else:

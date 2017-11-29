@@ -38,7 +38,7 @@ def run(cmd, f):
     f.close()
 
 # iris dataset
-datasets_name = ['bank-note', 'breast-cancer', 'iris-type']
+datasets_name = ['iris-type', 'bank-note', 'breast-cancer', 'wine', 'wine-quality-red', 'wine-quality-white', 'glass']
 for name in datasets_name:
     f = open('./output/k-means++-{}-unnomalized.csv'.format(name), 'w+')
     cmd = 'python3 ./main.py k-means++ 0 class --attributes datasets/{}-attributes.txt --train datasets/{}-data.csv --normalize n'.format(name, name)
