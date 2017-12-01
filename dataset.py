@@ -82,27 +82,3 @@ class DataSet:
 
     def append(self, example):
         self.all_examples.append(example)
-
-
-
-"""
-  def majority(self, classifier, is_root=False):
-    classifier_name = classifier.name
-    classifier_value_set = sorted(classifier.values)
-
-    if len(self.all_examples) == 0:
-      return None
-
-    subset_sizes = []
-    for value in classifier_value_set:
-      subset_sizes.append(len([example for example in self.all_examples if example.get_value(classifier_name) == value]))
-
-    max_subset_size = max(subset_sizes)
-    if is_root == False and len([subset_size for subset_size in subset_sizes if subset_size == max_subset_size]) > 1:
-        return None
-
-    majority_index = subset_sizes.index(max_subset_size)
-    value = classifier_value_set[majority_index]
-
-    return value
-"""

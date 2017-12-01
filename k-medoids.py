@@ -26,8 +26,6 @@ class ClusteringImp(clustering.Clustering):
                 self.dist_matrix[j][i] = self.dist_matrix[i][j]
 
     def init_centers(self):
-        #for idx, cluster in enumerate(self.clusters):
-            #cluster.center = int(len(self.clustering_data) / len(self.clusters) * (idx + 1) - 1)
         all_centers = {}
         random.seed()
         for cluster in self.clusters:
@@ -85,6 +83,5 @@ class ClusteringImp(clustering.Clustering):
             if (all_centers != new_all_centers) and (max_iter != self.iterations):
                 all_centers = new_all_centers
             else:
-                #print("k-medoids done in iter %d" % self.iterations)
                 break
 

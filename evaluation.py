@@ -68,24 +68,5 @@ def classification_error_distance(clusters_stat, label, total=None):
                 next_label_stat.pop(l_idx)
                 q.put(Node(next_clusters_stat, next_label_stat, node.match + c_stat[value]))
 
-
-    # recursion version
-    """
-    def search_best_mapping(_clusters_stat, _label, match=0):
-        for c_idx, c_stat in enumerate(_clusters_stat):
-            for l_idx, value in enumerate(_label):
-                if len(_label) == 1:
-                    nonlocal best_match
-                    best_match = max(best_match, match + c_stat[value])
-                else:
-                    next_clusters_stat = copy.copy(_clusters_stat)
-                    next_clusters_stat.pop(c_idx)
-                    next_label_stat = copy.copy(_label)
-                    next_label_stat.pop(l_idx)
-                    search_best_mapping(next_clusters_stat, next_label_stat, match + c_stat[value])
-
-    search_best_mapping(clusters_stat, label)
-    """
-
     d_ce = (total - best_match) / total
     return d_ce
