@@ -18,8 +18,10 @@ def run(cmd, f):
     my_csv_writer = csv.writer(f)
     for i in range(times):
         result = subprocess.check_output(cmd, shell=True)
+        result = result.decode('utf-8')
         result = json.loads(result)
         my_csv_writer.writerow(result)
+        f.flush()
     hamming_distances, mis_errors, iterations = [], [], []
     f.flush()
     f.seek(0, 0)
@@ -37,8 +39,9 @@ def run(cmd, f):
     print("avg iterations: {}".format(sum(iterations) / float(l)))
     f.close()
 
-# iris dataset
-datasets_name = ['iris-type', 'bank-note', 'breast-cancer', 'wine', 'wine-quality-red', 'wine-quality-white', 'glass']
+# datasets
+datasets_name = ['wine', 'breast-cancer', 'bank-note', 'iris-type']
+
 for name in datasets_name:
     f = open('./output/k-means++-{}-unnomalized.csv'.format(name), 'w+')
     cmd = 'python3 ./main.py k-means++ 0 class --attributes datasets/{}-attributes.txt --train datasets/{}-data.csv --normalize n'.format(name, name)
